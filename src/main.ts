@@ -12,7 +12,7 @@ async function bootstrap() {
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, swagger);
-  SwaggerModule.setup('/', app, document);
+  SwaggerModule.setup('/swagger', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
 
