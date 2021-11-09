@@ -1,28 +1,28 @@
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
-import { ReviewSeriesController } from './review-series.controller';
+import { CreateReviewController } from './create-review.controller';
 import { CommentChecker } from './comment-checker';
-import { ReviewSeriesRepository } from './review-series.repository';
+import { CreateReviewRepository } from './create-review.repository';
 
 let app: INestApplication;
 let commentCheckerMock: CommentChecker;
-let gradeSeriesRepositoryMock: ReviewSeriesRepository;
+let gradeSeriesRepositoryMock: CreateReviewRepository;
 
 beforeEach(async () => {
   commentCheckerMock = {} as CommentChecker;
   commentCheckerMock.check = jest.fn().mockReturnValue(true);
 
-  gradeSeriesRepositoryMock = {} as ReviewSeriesRepository;
+  gradeSeriesRepositoryMock = {} as CreateReviewRepository;
   gradeSeriesRepositoryMock.save = jest.fn();
 
   const moduleFixture: TestingModule = await Test.createTestingModule({
-    controllers: [ReviewSeriesController],
-    providers: [CommentChecker, ReviewSeriesRepository],
+    controllers: [CreateReviewController],
+    providers: [CommentChecker, CreateReviewRepository],
   })
     .overrideProvider(CommentChecker)
     .useValue(commentCheckerMock)
-    .overrideProvider(ReviewSeriesRepository)
+    .overrideProvider(CreateReviewRepository)
     .useValue(gradeSeriesRepositoryMock)
     .compile();
 

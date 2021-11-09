@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, Max, Min } from 'class-validator';
 
-export class SeriesRequest {
+export class ReviewRequest {
   @ApiProperty()
   @IsNotEmpty()
   title: string;

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
-export class Series {
+export class SeriesReview {
   @Prop()
   title: string;
 
@@ -12,4 +12,4 @@ export class Series {
   comment?: string;
 }
 
-export const SeriesSchema = SchemaFactory.createForClass(Series);
+export const SeriesReviewSchema = SchemaFactory.createForClass(SeriesReview);

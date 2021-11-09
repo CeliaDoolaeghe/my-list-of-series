@@ -1,17 +1,17 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { ReviewSeriesRepository } from './review-series.repository';
+import { CreateReviewRepository } from './create-review.repository';
 import { CommentChecker } from './comment-checker';
-import { SeriesRequest } from './series-request';
+import { ReviewRequest } from './review-request';
 
 @Controller()
-export class ReviewSeriesController {
+export class CreateReviewController {
   constructor(
     private commentChecker: CommentChecker,
-    private reviewSeriesRepository: ReviewSeriesRepository,
+    private createReviewRepository: CreateReviewRepository,
   ) {}
 
   @Post('/series/reviews')
-  async grade(@Body() gradeRequest: SeriesRequest): Promise<void> {
+  async grade(@Body() gradeRequest: ReviewRequest): Promise<void> {
     if (gradeRequest.comment) {
       const isValidComment = this.commentChecker.check(gradeRequest.comment);
 
@@ -22,6 +22,6 @@ export class ReviewSeriesController {
       }
     }
 
-    await this.reviewSeriesRepository.save(gradeRequest);
+    await this.createReviewRepository.save(gradeRequest);
   }
 }

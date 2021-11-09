@@ -1,7 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Series } from '../../series/series';
+import { SeriesReview } from '../../series-reviews/series-review';
 
-export class SeriesResponse {
+export class ReviewResponse {
   @ApiProperty()
   title: string;
 
@@ -11,7 +11,7 @@ export class SeriesResponse {
   @ApiPropertyOptional()
   comment?: string;
 
-  constructor(series: Series) {
+  constructor(series: SeriesReview) {
     this.title = series.title;
     this.grade = series.grade;
     this.comment = series.comment;
