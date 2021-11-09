@@ -6,12 +6,6 @@ export class SeriesResponse {
   title: string;
 
   @ApiProperty()
-  type: string;
-
-  @ApiPropertyOptional()
-  summary?: string;
-
-  @ApiProperty()
   grade: number;
 
   @ApiPropertyOptional()
@@ -19,8 +13,6 @@ export class SeriesResponse {
 
   constructor(series: Series) {
     this.title = series.title;
-    this.type = series.type;
-    this.summary = series.summary;
     this.grade = series.grade;
     this.comment = series.comment;
   }

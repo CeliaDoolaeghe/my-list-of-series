@@ -6,12 +6,6 @@ export class Series {
   title: string;
 
   @Prop()
-  type: string;
-
-  @Prop()
-  summary?: string;
-
-  @Prop()
   grade: number;
 
   @Prop()
