@@ -7,14 +7,14 @@ import { CreateReviewRepository } from './create-review.repository';
 
 let app: INestApplication;
 let commentCheckerMock: CommentChecker;
-let gradeSeriesRepositoryMock: CreateReviewRepository;
+let createReviewRepository: CreateReviewRepository;
 
 beforeEach(async () => {
   commentCheckerMock = {} as CommentChecker;
   commentCheckerMock.check = jest.fn().mockReturnValue(true);
 
-  gradeSeriesRepositoryMock = {} as CreateReviewRepository;
-  gradeSeriesRepositoryMock.save = jest.fn();
+  createReviewRepository = {} as CreateReviewRepository;
+  createReviewRepository.save = jest.fn();
 
   const moduleFixture: TestingModule = await Test.createTestingModule({
     controllers: [CreateReviewController],
@@ -23,7 +23,7 @@ beforeEach(async () => {
     .overrideProvider(CommentChecker)
     .useValue(commentCheckerMock)
     .overrideProvider(CreateReviewRepository)
-    .useValue(gradeSeriesRepositoryMock)
+    .useValue(createReviewRepository)
     .compile();
 
   app = moduleFixture.createNestApplication();
