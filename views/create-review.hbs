@@ -1,0 +1,30 @@
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>My list of series</title>
+
+    <link rel='stylesheet' href='assets/css/create-review.css'>
+    <script src="assets/js/create-review.js" defer></script>
+  </head>
+  <body>
+    <h1>Review Series</h1>
+    <form onsubmit='return false;'>
+      <div class='form-field'>
+        <label for='title'>Title of the series*</label>
+        <input type='text' id='title' name='title' />
+      </div>
+
+      <div class='form-field'>
+        <label for='grade'>Grade*</label>
+        <input type='number' id='grade' name='grade' min='0' max='5' />
+      </div>
+
+      <div class='form-field'>
+        <label for='comment'>Comment</label>
+        <input type='text' id='comment' name='comment' />
+      </div>
+
+      <button id='submit-review-form'>Create review</button>
+    </form>
+  </body>
+</html>
