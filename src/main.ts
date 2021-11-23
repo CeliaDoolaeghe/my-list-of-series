@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import helmet from 'helmet';
+import * as helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -16,6 +16,7 @@ async function bootstrap() {
     .setTitle('My List of SeriesReview')
     .setDescription('Manage my list of series')
     .setVersion('1.0.0')
+    .addBasicAuth()
     .build();
   const document = SwaggerModule.createDocument(app, swagger);
   SwaggerModule.setup('/swagger', app, document);

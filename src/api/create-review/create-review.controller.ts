@@ -1,9 +1,19 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { CreateReviewRepository } from './create-review.repository';
 import { CommentChecker } from './comment-checker';
 import { ReviewRequest } from './review-request';
+import { ApiBasicAuth } from '@nestjs/swagger';
+import { AuthGuard } from '../../auth/auth.guard';
 
 @Controller()
+@ApiBasicAuth()
+@UseGuards(AuthGuard)
 export class CreateReviewController {
   constructor(
     private commentChecker: CommentChecker,
