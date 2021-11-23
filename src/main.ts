@@ -4,9 +4,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.useGlobalPipes(new ValidationPipe());
+  app.use(helmet());
 
   const swagger = new DocumentBuilder()
     .setTitle('My List of SeriesReview')
@@ -15,8 +19,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swagger);
   SwaggerModule.setup('/swagger', app, document);
-
-  app.useGlobalPipes(new ValidationPipe());
 
   app.useStaticAssets(join(__dirname, '../public'));
   app.setBaseViewsDir(join(__dirname, '../views'));
