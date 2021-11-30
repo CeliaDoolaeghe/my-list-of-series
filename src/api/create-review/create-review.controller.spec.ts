@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { CreateReviewController } from './create-review.controller';
 import { CommentChecker } from './comment-checker';
 import { CreateReviewRepository } from './create-review.repository';
+import { AuthGuard } from '../../auth/auth.guard';
 
 let app: INestApplication;
 let commentCheckerMock: CommentChecker;
@@ -20,6 +21,8 @@ beforeEach(async () => {
     controllers: [CreateReviewController],
     providers: [CommentChecker, CreateReviewRepository],
   })
+    .overrideGuard(AuthGuard)
+    .useValue({})
     .overrideProvider(CommentChecker)
     .useValue(commentCheckerMock)
     .overrideProvider(CreateReviewRepository)
@@ -122,6 +125,18 @@ it('400 invalid comment', () => {
       title: 'Test',
       grade: 3,
       comment: 'An invalid comment',
+    })
+    .expect(400);
+});
+
+it('400 mandatory comment if grade is lower than 3', () => {
+  commentCheckerMock.check = jest.fn().mockReturnValue(false);
+
+  return request(app.getHttpServer())
+    .post('/series/reviews')
+    .send({
+      title: 'Test',
+      grade: 1,
     })
     .expect(400);
 });
